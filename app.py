@@ -35,17 +35,22 @@ def main():
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        filename = secure_filename(file.filename)
-        fileextension = filename.rsplit('.', 1)[1]
-        try:
-            # blob_service.create_blob_from_stream(container, filename, file) 
-            # blob_service_client.create_blob_from_stream(container, filename, file)
-            blob_service_client.get_blob_client(container=container, blob=filename).upload_blob(file)
+        if file:
+            try:
+                # Generate a random filename
+                random_filename = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+                filename = secure_filename(file.filename)
+                fileextension = filename.rsplit('.', 1)[1]
+                unique_filename = f"{random_filename}.{fileextension}"
 
-        except Exception:
-            print('Exception=' + str(Exception))
-            pass
-        ref = 'http://' + account + '.blob.core.windows.net/' + container + '/' + filename
+                # Upload the file to Azure Storage container
+                blob_service_client.get_blob_client(container=container, blob=unique_filename).upload_blob(file)
+
+                # Construct the URL to the uploaded file
+                uploaded_file_url = f'https://{account}.blob.core.windows.net/{container}/{unique_filename}'
+                return f"File uploaded successfully. URL: {uploaded_file_url}"
+            except Exception as e:
+                return f"An error occurred: {str(e)}"
 
     return render_template('uploadfile.html')
 
