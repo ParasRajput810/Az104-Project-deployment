@@ -1,0 +1,182 @@
+<html>
+<head>
+    <title>
+    Upload Page
+    </title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;0,600;0,700;1,100;1,700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+    color: whitesmoke;
+}
+
+
+.container{
+
+ height: 380px;
+ width: 600px;
+ background-color: whitesmoke;
+ color: #272927;
+ border-radius: 25px;
+ padding: 20px;
+ box-shadow: 0 20 0 rgba(0,0,0,0.2);
+}
+.container .upload{
+ border: 1px solid red;
+ width: 100%;
+ height: 200px;
+ margin-top: 30px;
+ border: 2px dotted rgba(137, 43, 226, 0.226);
+ border-radius: 10px;
+ position: relative;
+ cursor: pointer;
+
+}
+
+.container .upload form .uploadimage{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;    
+}
+
+.uploadicon{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #2729272c !important;
+    
+}
+
+.btn-upload{
+    width: 100%;
+    height: 45px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #0077ffe2;
+    color: #fff;
+    font-weight: 500;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: all ease-in-out 0.2s;
+}
+
+.btn-upload:hover{
+    background-color: #0075ff;
+}
+
+.title{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.hinttext{
+    color: #00000033;
+    font-size: 12px;
+    text-align: center;
+    transform: translateY(170px);
+}
+
+footer{
+    position: absolute;
+    transform: translateY(250px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+footer a{
+    text-decoration: none;
+    color: white;
+
+    /* padding: 5px 10px;
+    background-color: #99ff0069;
+    border-radius: 5px; */
+}
+
+.center{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.center img{
+    /* border: 1px solid blue; */
+    width: 200px;
+   /* align-items: center; */
+}
+.filename p{
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgba(0, 0, 0, 0.425);
+    margin-left: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1 class="title">
+        Upload Your File Here
+    </h1>
+    <div class="upload">
+
+        <svg class="uploadicon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
+          </svg>
+
+          <p class="hinttext" id="txt">Drag and Drop or Click here to upload your file</p>
+          
+            
+    <form action="" method=post enctype=multipart/form-data>
+    <p>
+    <input onchange="filename()" id="filenameupload" class="uploadimage" type=file name=file>
+    <input class="btn-upload" type=submit value=Upload></p>
+</form>
+</div>
+    <div class="filename">
+        
+    </div>
+</div>
+</body>
+<footer>
+    <img src="https://intellipaat.com/course-image/2021/05/headed_logo.png" alt="">
+   <a href="https://intellipaat.com/" target="_blank">www.intellipaat.com</a> 
+</footer>
+<script>
+var filename = document.getElementById('filenameupload');
+var filenamevar = document.querySelector('.filename');
+
+filename.onchange = ({target}) =>{
+    let file = target.files[0];
+    inputname(file.name);
+
+}
+
+function inputname(name)
+{
+    filenamevar.innerHTML = `<p>${name}</p>`
+}
+
+</script>
+</html>
